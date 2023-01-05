@@ -1,0 +1,38 @@
+{
+  "name": "gravitproxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pkg .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon .",
+    "start": "node .",
+    "run-linux": "pm2 kill && pm2 startup && systemctl enable pm2-root && pm2 start cluster.json --restart-delay=3000 && pm2 save",
+    "run-win": "pm2 kill && pm2 start cluster.json --exp-backoff-restart-delay=100",
+    "prod-dev": "pm2-dev start .",
+    "pm-kill": "pm2 kill"
+  },
+  "bin": "./index.js",
+  "pkg": {
+    "scripts": "dist/**/*.js",
+    "targets": [
+      "latest-win-x64"
+    ],
+    "assets": [
+      "./node_modules/**/*"
+    ],
+    "outputPath": "./build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "nodemon": "^2.0.20",
+    "open": "^8.4.0",
+    "pkg": "^5.8.0",
+    "pm2": "^5.2.2"
+  }
+}
